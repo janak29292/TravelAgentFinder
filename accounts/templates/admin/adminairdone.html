@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% block content %}
+<section id="content" style="padding-top:0px">
+<div class="container">
+<div class="tab-container box">
+      <ul class="tabs">
+        <li><a href={% url 'accounts:admintourlist' %} >Tours</a></li>
+        <li><a href={% url 'accounts:adminhotellist' %} >Hotels</a></li>
+        <li><a href={% url 'accounts:admintrainlist' %} >Trains</a></li>
+        <li class="active"><a href={% url 'accounts:adminairlist' %} >Flights</a></li>
+        <li><a href={% url 'accounts:adminbuslist' %} >Bus</a></li>
+        <li><a href={% url 'accounts:adminvisalist' %} >Passport & Visa</a></li>
+        <li><a href={% url 'accounts:admincarlist' %} >Rental Vehicles</a></li>
+        <li><a href={% url 'accounts:admininsrncelist' %} >Travel Insurance</a></li>
+      </ul>
+        <div class="tab-pane fade in active">
+                <div class="tab-container full-width-style white-bg">
+                  <ul class="tabs">
+                    <li><a href={% url 'accounts:adminairlist' %} ><i class="soap-icon-doc-plus circle"></i>Enquiries and Replies</a></li>
+                    <li class="active"><a href={% url 'accounts:adminairdone' %} ><i class="soap-icon-stories circle"></i>Finished Enquiries</a></li>
+                  </ul>
+                  <div class="tab-content">
+                    <div class="tab-pane fade in active" id="first-tab">
+                      <h1>List of Accepted Enquiries</h1>
+                      <!--  Accordion -->
+                      <div class="toggle-container box" id="accordion1">
+                        {% for l in adlist %}
+                          <div class="panel style2">
+                            <h4 class="panel-title">
+                              <a class="collapsed" href="#l{{ l.pk }}" data-toggle="collapse" data-parent="#accordion1"><h2><b>Client : </b>{{ l.client }}</h2> <p> <b>Accepted : </b>{{ l.accptd }}</p></a>
+                            </h4>
+                            <div class="panel-collapse collapse" id="l{{ l.pk }}">
+                              <div class="panel-content">
+                                <h2> <b>Enquiry Information</b></h2><hr>
+                                <h4> <b>Tour Type :</b> {{ l.tour_type }}</h4>
+                                <h4> <b>Travel Starting Location :</b> {{ l.travel_start_location}}</h4>
+                                <h4> <b>Destination :</b> {{ l.destination }}</h4>
+                                <h4> <b>Date of Traveling :</b> {{ l.date_of_travel }}</h4>
+                                <h4> <b>Number of Adults :</b> {{ l.number_of_adults }}</h4>
+                                <h4> <b>Number of Children :</b> {{ l.number_of_children }}</h4>
+                                <h4> <b>Number of Infants :</b> {{ l.number_of_infants }}</h4>
+                                <h4> <b>Catagory :</b> {{ l.catagory }}</h4>
+                                <h4> <b>Additional Information :</b> {{ l.additional_information }}</h4>
+                                <h4> <b>Enquired on :</b> {{ l.created }}</h4><hr>
+                                <h2> <b>Reply Information </b></h2><hr>
+                                <h4> <b>Flight Names :</b> {{ l.flight_names }}</h4>
+                                <h4> <b>Dates and Timings :</b> {{ l.dates_and_timings }}</h4>
+                                <h4> <b>Fares :</b> {{ l.fares }}</h4>
+                                <h4> <b>Additional Information :</b> {{ l.additional_information_reply }}</h4>
+                                <h4> <b>Replied on :</b> {{ l.replied }}</h4><hr>
+                                <h2> <b>Client Information </b></h2><hr>
+                                <h4> <b>Name :</b> {{ l.client.first_name }} {{ l.client.last_name }}</h4>
+                                <h4> <b>Contact Number :</b> {{ l.client.phone }}</h4>
+                                <h4> <b>Email :</b> {{ l.client.user.email }}</h4>
+                                <h4> <b>Rated by This Client :</b> {{ l.rating.stars|floatformat:1 }}/5.0 stars</h4><hr>
+                                <h2> <b>Agent Information </b></h2><hr>
+                                <h4> <b>Name :</b> {{ l.agent.user.first_name }} {{ l.agent.user.last_name }}</h4>
+                                <h4> <b>Contact Number :</b> {{ l.agent.user.phone }}</h4>
+                                <h4> <b>Email :</b> {{ l.agent.user.user.email }}</h4>
+                                <h4> <b>Company Name :</b> {{ l.agent.company_name }}</h4>
+                            </div><!-- end content -->
+                          </div>
+                        </div>
+                        {% empty %}
+                        <h4>No Finished Enquiries</h4>
+                        {% endfor %}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

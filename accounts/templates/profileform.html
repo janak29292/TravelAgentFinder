@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+{% block content %}
+  <section id="content">
+    <div class="container" style="background-color: white;border:20px solid white;">
+      {% if updated %}
+      <h1>Changes Saved</h1>
+      <a href={% url 'accounts:userprofile' %}><button class="btn btn-success" type="button" name="button">Go to Profile</button> </a>
+      {% else %}
+      <form class="" enctype="multipart/form-data" method="post">
+        {% csrf_token %}
+        {% bootstrap_form updateform %}
+        <a href={% url 'accounts:userprofile' %}><button class="btn btn-default"type="button" name="button">Cancel</button> </a>
+        <input class="btn btn-warning" type="submit" name="" value="Update">
+      </form>
+      {% endif %}
+    </div>
+  </section>
+{% endblock %}

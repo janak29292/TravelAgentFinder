@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+{% block content %}
+<section id="content">
+  <div class="container">
+    {% if registered %}
+      <h1>Thank you for registering!</h1>
+    {% else %}
+      <h1>Register Here</h1>
+      
+
+      <form enctype="multipart/form-data" method="POST">
+        {% csrf_token %}
+        <p style="color:red">{{ er }}</p>
+        {{ agent_form.errors }}
+        {% bootstrap_form user_form %}
+        <h3>Agent Details</h3>
+        {% bootstrap_form client_form %}
+        {% bootstrap_form agent_form %}
+        <input class="btn btn-primary"type="submit" name="" value="Register">
+      </form>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,41 @@
+from django.conf.urls import url
+from agent import views
+
+app_name='agent'
+
+urlpatterns=[
+# url(r'^$',views.agentdash,name='agentdash'),
+url(r'^SignUp/$',views.agentsignup,name='agentsignup'),
+url(r'^TourEnquiryList/$',views.agenttourlist,name='agenttourlist'),
+url(r'^TourPending/$',views.agenttourpending,name='agenttourpending'),
+url(r'^TourComplete/$',views.agenttourdone,name='agenttourdone'),
+url(r'^TourEnquiryReply/(?P<key>[%&+ \w]+)/$',views.agenttourrply,name='agenttourrply'),
+url(r'^HotelEnquiryList/$',views.agenthotellist,name='agenthotellist'),
+url(r'^HotelPending/$',views.agenthotelpending,name='agenthotelpending'),
+url(r'^HotelComplete/$',views.agenthoteldone,name='agenthoteldone'),
+url(r'^HotelEnquiryReply/(?P<key>[%&+ \w]+)/$',views.agenthotelrply,name='agenthotelrply'),
+url(r'^TrainEnquiryList/$',views.agenttrainlist,name='agenttrainlist'),
+url(r'^TrainPending/$',views.agenttrainpending,name='agenttrainpending'),
+url(r'^TrainComplete/$',views.agenttraindone,name='agenttraindone'),
+url(r'^TrainEnquiryReply/(?P<key>[%&+ \w]+)/$',views.agenttrainrply,name='agenttrainrply'),
+url(r'^FlightEnquiryList/$',views.agentairlist,name='agentairlist'),
+url(r'^FlightPending/$',views.agentairpending,name='agentairpending'),
+url(r'^FlightComplete/$',views.agentairdone,name='agentairdone'),
+url(r'^FlightEnquiryReply/(?P<key>[%&+ \w]+)/$',views.agentairrply,name='agentairrply'),
+url(r'^BusEnquiryList/$',views.agentbuslist,name='agentbuslist'),
+url(r'^BusPending/$',views.agentbuspending,name='agentbuspending'),
+url(r'^BusComplete/$',views.agentbusdone,name='agentbusdone'),
+url(r'^BusEnquiryReply/(?P<key>[%&+ \w]+)/$',views.agentbusrply,name='agentbusrply'),
+url(r'^VisaAndPassportEnquiryList/$',views.agentvisalist,name='agentvisalist'),
+url(r'^VisaAndPassportPending/$',views.agentvisapending,name='agentvisapending'),
+url(r'^VisaAndPassportComplete/$',views.agentvisadone,name='agentvisadone'),
+url(r'^VisaAndPassportEnquiryReply/(?P<key>[%&+ \w]+)/$',views.agentvisarply,name='agentvisarply'),
+url(r'^RentalCarEnquiryList/$',views.agentcarlist,name='agentcarlist'),
+url(r'^RentalCarPending/$',views.agentcarpending,name='agentcarpending'),
+url(r'^RentalCarComplete/$',views.agentcardone,name='agentcardone'),
+url(r'^RentalCarEnquiryReply/(?P<key>[%&+ \w]+)/$',views.agentcarrply,name='agentcarrply'),
+url(r'^TravelInsuranceEnquiryList/$',views.agentinsrncelist,name='agentinsrncelist'),
+url(r'^TravelInsurancePending/$',views.agentinsrncepending,name='agentinsrncepending'),
+url(r'^TravelInsuranceComplete/$',views.agentinsrncedone,name='agentinsrncedone'),
+url(r'^TravelInsuranceEnquiryReply/(?P<key>[%&+ \w]+)/$',views.agentinsrncerply,name='agentinsrncerply'),
+]

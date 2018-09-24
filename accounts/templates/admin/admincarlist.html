@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% block content %}
+<section id="content" style="padding-top:0px">
+<div class="container">
+<div class="tab-container box">
+      <ul class="tabs">
+        <li><a href={% url 'accounts:admintourlist' %} >Tours</a></li>
+        <li><a href={% url 'accounts:adminhotellist' %} >Hotels</a></li>
+        <li><a href={% url 'accounts:admintrainlist' %} >Trains</a></li>
+        <li><a href={% url 'accounts:adminairlist' %} >Flights</a></li>
+        <li><a href={% url 'accounts:adminbuslist' %} >Bus</a></li>
+        <li><a href={% url 'accounts:adminvisalist' %} >Passport & Visa</a></li>
+        <li class="active"><a href={% url 'accounts:admincarlist' %} >Rental Vehicles</a></li>
+        <li><a href={% url 'accounts:admininsrncelist' %} >Travel Insurance</a></li>
+      </ul>
+        <div class="tab-pane fade in active">
+                <div class="tab-container full-width-style white-bg">
+                  <ul class="tabs">
+                    <li class="active"><a href={% url 'accounts:admincarlist' %} ><i class="soap-icon-doc-minus circle"></i>Enquiries and Replies</a></li>
+                    <li><a href={% url 'accounts:admincardone' %} ><i class="soap-icon-stories circle"></i>Finished Enquiries</a></li>
+                  </ul>
+                  <div class="tab-content">
+                    <div class="tab-pane fade in active" id="first-tab">
+                      <!--  Accordion -->
+                      <div class="toggle-container box" id="accordion1">
+                        {% for l in list %}
+                          <div class="panel style2">
+                            <h4 class="panel-title">
+                              <a class="collapsed" href="#l{{ l.pk }}" data-toggle="collapse" data-parent="#accordion1"><h2><b>Client : </b>{{ l.client }}</h2> <p><b>Enquired : </b> {{ l.created }}</p></a>
+                            </h4>
+                            <div class="panel-collapse collapse" id="l{{ l.pk }}">
+                              <div class="panel-content">
+                                <div class="toggle-container box" id="accordion2">
+                              {% for a in l.carreply.all %}
+                                  <div class="panel style2">
+                                    <h4 class="panel-title">
+                                      <a class="collapsed" href="#a{{ a.pk }}" data-toggle="collapse" data-parent="#accordion2"><h2><b>Agent : </b>{{ a.agent }}</h2> {% if a.agent.rating %}<span><b>Rated </b>{{ a.agent.rating|floatformat:1 }} /5.0 stars<b> by </b>{{ a.agent.rated }} clients </span>{% else %} Not Yet Rated !!{% endif %} <p><b>Replied : </b> {{ a.replied }}</p></a>
+                                    </h4>
+                                    <div class="panel-collapse collapse" id="a{{ a.pk }}">
+                                      <div class="panel-content">
+                                        <h2> <b>Reply Information </b></h2><hr>
+                                        <h4> <b>Vehicles Available :</b> {{ a.vehicles_available }}</h4>
+                                        <h4> <b>Charges :</b> {{ a.charges }}</h4>
+                                        <h4> <b>Additional Information :</b> {{ a.additional_information }}</h4>
+                                        <h4> <b>Replied on :</b> {{ a.replied }}</h4><hr>
+                                      </div><!-- end content -->
+                                    </div>
+                                  </div>
+                                {% empty %}
+                                <h4>No Replies Yet!!</h4>
+                              {% endfor %}
+                              </div>
+                              <h2> <b>Enquiry Information</b></h2><hr>
+                              <h4> <b>Tour Type :</b> {{ l.tour_type }}</h4>
+                              <h4> <b>Type of Vehicle :</b> {{ l.type_of_vehicle }}</h4>
+                              <h4> <b>Book From :</b> {{ l.book_from }}</h4>
+                              <h4> <b>Book Upto :</b> {{ l.book_upto }}</h4>
+                              <h4> <b>Travel Start Location :</b> {{ l.travel_start_location }}</h4>
+                              <h4> <b>Destination :</b> {{ l.destination }}</h4>
+                              <h4> <b>Numbers of Vehicles Required :</b> {{ l.number_of_vehicles_required }}</h4>
+                              <h4> <b>Additional Information :</b> {{ l.additional_information }}</h4>
+                              <h4> <b>Enquired on :</b> {{ l.created }}</h4><hr>
+                            </div><!-- end content -->
+                          </div>
+                        </div>
+                        {% empty %}
+                        <h4>No Pending Enquiries</h4>
+                        {% endfor %}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

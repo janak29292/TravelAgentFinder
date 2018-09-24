@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% block content %}
+<section id="content" style="padding-top:0px">
+<div class="container">
+<div class="tab-container box">
+      <ul class="tabs">
+        <li><a href={% url 'agent:agenttourlist' %} >Tours</a></li>
+        <li><a href={% url 'agent:agenthotellist' %} >Hotels</a></li>
+        <li><a href={% url 'agent:agenttrainlist' %} >Trains</a></li>
+        <li><a href={% url 'agent:agentairlist' %} >Flights</a></li>
+        <li><a href={% url 'agent:agentbuslist' %} >Bus</a></li>
+        <li><a href={% url 'agent:agentvisalist' %} >Passport & Visa</a></li>
+        <li><a href={% url 'agent:agentcarlist' %} >Rental Vehicles</a></li>
+        <li class="active"><a href={% url 'agent:agentinsrncelist' %} >Travel Insurance</a></li>
+      </ul>
+        <div class="tab-pane fade in active">
+                <div class="tab-container full-width-style white-bg">
+                  <ul class="tabs">
+                    <li><a href={% url 'agent:agentinsrncelist' %} ><i class="soap-icon-doc-plus circle"></i>New Enquiries</a></li>
+                    <li><a href={% url 'agent:agentinsrncepending' %} ><i class="soap-icon-doc-minus circle"></i>Pending Enquiries</a></li>
+                    <li class="active"><a href={% url 'agent:agentinsrncedone' %} ><i class="soap-icon-stories circle"></i>Accepted Enquiries</a></li>
+                  </ul>
+                  <div class="tab-content">
+                    <div class="tab-pane fade in active" id="first-tab">
+                      <h1>List of Accepted Enquiries</h1>
+                      <!--  Accordion -->
+                      <div class="toggle-container box" id="accordion1">
+                        {% for l in adlist %}
+                          <div class="panel style2">
+                            <h4 class="panel-title">
+                              <a class="collapsed" href="#l{{ l.pk }}" data-toggle="collapse" data-parent="#accordion1"><h2><b>Client : </b>{{ l.client }}</h2> <p> <b>Accepted : </b>{{ l.accptd }}</p></a>
+                            </h4>
+                            <div class="panel-collapse collapse" id="l{{ l.pk }}">
+                              <div class="panel-content">
+                                <h2> <b>Enquiry Information</b></h2><hr>
+                                <h4> <b>Country :</b> {{ l.country }}</h4>
+                                <h4> <b>Type of Insurance :</b> {{ l.type_of_insurance }}</h4>
+                                <h4> <b>Number of People :</b> {{ l.number_of_people }}</h4>
+                                <h4> <b>Ages of People:</b> {{ l.ages_of_people }}</h4>
+                                <h4> <b>Travel Start Location :</b> {{ l.travel_start_location }}</h4>
+                                <h4> <b>Destination :</b> {{ l.destination }}</h4>
+                                <h4> <b>Additional Information :</b> {{ l.additional_information }}</h4>
+                                <h4> <b>Enquired on :</b> {{ l.created }}</h4><hr>
+                                <h2> <b>Reply Information </b></h2><hr>
+                                <h4> <b>Insurance Coverage :</b> {{ l.insurance_coverage }}</h4>
+                                <h4> <b>Charges :</b> {{ l.charges }}</h4>
+                                <h4> <b>Additional Information :</b> {{ l.additional_information_reply }}</h4>
+                                <h4> <b>Replied on :</b> {{ l.replied }}</h4><hr>
+                                <h2> <b>Client Information </b></h2><hr>
+                                <h4> <b>Name :</b> {{ l.client.first_name }} {{ l.client.last_name }}</h4>
+                                <h4> <b>Contact Number :</b> {{ l.client.phone }}</h4>
+                                <h4> <b>Email :</b> {{ l.client.user.email }}</h4>
+                                <h4> <b>Rated by This Client :</b> {{ l.rating.stars|floatformat:1 }}/5.0 stars</h4>
+                            </div><!-- end content -->
+                          </div>
+                        </div>
+                        {% empty %}
+                        <h4>No Finished Enquiries</h4>
+                        {% endfor %}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

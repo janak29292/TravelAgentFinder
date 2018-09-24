@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+<section id="content" style="padding-top:0px">
+<div class="container">
+<!--  Accordion -->
+  <div class="toggle-container box" id="accordion1">
+                        {% for l in loc %}
+                          <div class="panel style2">
+                            <h4 class="panel-title">
+                              <a class="collapsed" href="#l{{ l.pk }}" data-toggle="collapse" data-parent="#accordion1"><h2><b>Client : </b>{{ l.first_name }} {{ l.last_name }}</h2> <p> <b>Username : </b>{{ l.user.username }}</p></a>
+                            </h4>
+                            <div class="panel-collapse collapse" id="l{{ l.pk }}">
+                              <div class="panel-content">
+                                <h2> <b>Client Information </b></h2><hr>
+                                <h4> <b>Name :</b> {{ l.first_name }} {{ l.last_name }}</h4>
+                                <h4> <b>Contact Number :</b> {{ l.phone }}</h4>
+                                <h4> <b>Address :</b> {{ l.address }}</h4>
+                                <h4> <b>Occupation :</b> {{ l.occupation }}</h4>
+                                <h4> <b>Date of Birth :</b> {{ l.date_of_birth }}</h4>
+                                <h4> <b>Email :</b> {{ l.user.email }}</h4>
+                            </div><!-- end content -->
+                          </div>
+                        </div>
+                        {% empty %}
+                        <h4>No Agents</h4>
+                        {% endfor %}
+                      </div>
+</div>
+</section>
+{% endblock %}

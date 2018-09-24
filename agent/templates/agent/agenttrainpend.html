@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% block content %}
+<section id="content" style="padding-top:0px">
+  <div class="container">
+  <div class="tab-container box">
+        <ul class="tabs">
+          <li><a href={% url 'agent:agenttourlist' %} >Tours</a></li>
+          <li><a href={% url 'agent:agenthotellist' %} >Hotels</a></li>
+          <li class="active"><a href={% url 'agent:agenttrainlist' %} >Trains</a></li>
+          <li><a href={% url 'agent:agentairlist' %} >Flights</a></li>
+          <li><a href={% url 'agent:agentbuslist' %} >Bus</a></li>
+          <li><a href={% url 'agent:agentvisalist' %} >Passport & Visa</a></li>
+          <li><a href={% url 'agent:agentcarlist' %} >Rental Vehicles</a></li>
+          <li><a href={% url 'agent:agentinsrncelist' %} >Travel Insurance</a></li>
+        </ul>
+          <div class="tab-pane fade in active">
+                  <div class="tab-container full-width-style white-bg">
+                    <ul class="tabs">
+                      <li><a href={% url 'agent:agenttrainlist' %} ><i class="soap-icon-doc-plus circle"></i>New Enquiries</a></li>
+                      <li class="active"><a href={% url 'agent:agenttrainpending' %} ><i class="soap-icon-doc-minus circle"></i>Pending Enquiries</a></li>
+                      <li><a href={% url 'agent:agenttraindone' %} ><i class="soap-icon-stories circle"></i>Accepted Enquiries</a></li>
+                    </ul>
+                    <div class="tab-content">
+                      <div class="tab-pane fade in active" id="first-tab">
+                        <h1>List of Pending Enquiries</h1>
+                        <!--  Accordion -->
+                        <div class="toggle-container box" id="accordion1">
+                          {% for rl in rlist %}
+                            {% for rlr in rl.trainreply.all %}
+                              {% if rlr.agent.user.user == user %}
+                              <div class="panel style2">
+                                <h4 class="panel-title">
+                                  <a class="collapsed" href="#l{{ rlr.pk }}" data-toggle="collapse" data-parent="#accordion1"><h2><b>Client : </b>{{ rl.client }}</h2> <p><b>Replied : </b> {{ rlr.replied }}</p></a>
+                                </h4>
+                                <div class="panel-collapse collapse" id="l{{ rlr.pk }}">
+                                  <div class="panel-content">
+                                    <h2> <b>Enquiry Information</b></h2><hr>
+                                    <h4> <b>Tour Type :</b> {{ rl.tour_type }}</h4>
+                                    <h4> <b>Travel Starting Location :</b> {{ rl.travel_start_location}}</h4>
+                                    <h4> <b>Destination :</b> {{ rl.destination }}</h4>
+                                    <h4> <b>Date of Traveling :</b> {{ rl.date_of_travel }}</h4>
+                                    <h4> <b>Number of Adults :</b> {{ rl.number_of_adults }}</h4>
+                                    <h4> <b>Number of Children :</b> {{ rl.number_of_children }}</h4>
+                                    <h4> <b>Number of Infants :</b> {{ rl.number_of_infants }}</h4>
+                                    <h4> <b>Catagory :</b> {{ rl.catagory }}</h4>
+                                    <h4> <b>Additional Information :</b> {{ rl.additional_information }}</h4>
+                                    <h4> <b>Enquired on :</b> {{ rl.created }}</h4><hr>
+                                    <h2> <b>Reply Information </b></h2><hr>
+                                    <h4> <b>Names of Trains :</b> {{ rlr.names_of_trains}}</h4>
+                                    <h4> <b>Train Timings :</b> {{ rlr.train_timings }}</h4>
+                                    <h4> <b>Days of Running :</b> {{ rlr.days_of_running }}</h4>
+                                    <h4> <b>Train Timings :</b> {{ rlr.train_timings }}</h4>
+                                    <h4> <b>Additional Information :</b> {{ rlr.additional_information }}</h4>
+                                    <h4> <b>Replied on :</b> {{ rlr.replied }}</h4>
+                                  </div><!-- end content -->
+                                </div>
+                              </div>
+                            {% endif %}
+                          {% endfor %}
+                        {% endfor %}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}

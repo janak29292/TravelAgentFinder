@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+{% block content %}
+  <section id="content" style="padding-top:0px">
+    <div class="container">
+      <div class="tab-container box">
+        <ul class="tabs">
+          <li class="active"><a href={% url 'agent:agenttourlist' %} >Tours</a></li>
+          <li><a href={% url 'agent:agenthotellist' %} >Hotels</a></li>
+          <li><a href={% url 'agent:agenttrainlist' %} >Trains</a></li>
+          <li><a href={% url 'agent:agentairlist' %} >Flights</a></li>
+          <li><a href={% url 'agent:agentbuslist' %} >Bus</a></li>
+          <li><a href={% url 'agent:agentvisalist' %} >Passport & Visa</a></li>
+          <li><a href={% url 'agent:agentcarlist' %} >Rental Vehicles</a></li>
+          <li><a href={% url 'agent:agentinsrncelist' %} >Travel Insurance</a></li>
+        </ul>
+        <div class="tab-pane fade in active">
+          <div class="tab-container full-width-style white-bg">
+            <ul class="tabs">
+              <li class="active"><a href={% url 'agent:agenttourlist' %} ><i class="soap-icon-doc-plus circle"></i>Enquiries List</a></li>
+              <li><a href={% url 'agent:agenttourpending' %} ><i class="soap-icon-doc-minus circle"></i>Pending Enquiries</a></li>
+              <li><a href={% url 'agent:agenttourdone' %} ><i class="soap-icon-stories circle"></i>Accepted Enquiries</a></li>
+            </ul>
+            <div class="tab-content">
+              <div class="tab-pane fade in active" id="first-tab">
+                <form class="" enctype="multipart/form-data" method="post">
+                    {% csrf_token %}
+                    {% if replied %}
+                    <h1>Your Reply is Submitted</h1>
+                    {% else %}
+                    {% bootstrap_form enqtourreplyform %}
+                    <input class="btn btn-primary" type="submit" name="" value="Reply">
+                    {% endif %}
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+{% endblock %}

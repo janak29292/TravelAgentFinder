@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<!--[if IE 8]>          <html class="ie ie8"> <![endif]-->
+<!--[if IE 9]>          <html class="ie ie9"> <![endif]-->
+<!--[if gt IE 9]><!-->  <html class=""> <!--<![endif]-->
+<head>
+    <!-- Page Title -->
+    <title>Login | TravelAgentFinder</title>
+
+    <link href={% static "images/favicon.png" %} rel="shortcut icon" type="image/x-icon">
+
+    <!-- Meta Tags -->
+    <meta charset="utf-8">
+    <meta name="keywords" content="HTML5 Template" />
+    <meta name="description" content="Travelo | Responsive HTML5 Travel Template">
+    <meta name="author" content="SoapTheme">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Theme Styles -->
+    <link rel="stylesheet" href={% static "css/bootstrap.min.css" %}>
+    <link rel="stylesheet" href={% static "css/font-awesome.min.css" %}>
+    <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,900' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,100,200,300,500' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href={% static "css/animate.min.css" %}>
+
+    <!-- Main Style -->
+    <link id="main-style" rel="stylesheet" href={% static "css/style.css" %}>
+
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href={% static "css/custom.css" %}>
+
+    <!-- Updated Styles -->
+    <link rel="stylesheet" href={% static "css/updates.css" %}>
+
+    <!-- Responsive Styles -->
+    <link rel="stylesheet" href={% static "css/responsive.css" %}>
+
+    <!-- CSS for IE -->
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" type="text/css" href="css/ie.css" />
+    <![endif]-->
+
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script type='text/javascript' src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+      <script type='text/javascript' src="http://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.js"></script>
+    <![endif]-->
+</head>
+<body class="soap-login-page style1 body-blank">
+    <div id="page-wrapper" class="wrapper-blank">
+        <section id="content">
+          <div class="container">
+              <div id="main">
+                  <h1 class="block">
+                      <a href={% url 'index' %} title="Travelo - home">
+                          <img src={% static "images/logogly.png" %} alt="Good Luck Yatra" />
+                      </a>
+                  </h1>
+                  <div class="text-center yellow-color box" style="font-size: 4em; font-weight: 300; line-height: 1em;">Welcome!</div>
+                  <p class="light-blue-color block" style="font-size: 1.3333em;">Please login to your account. <br> <span style="color:red">{{ error }}</span> </p>
+                  <div class="col-sm-8 col-md-6 col-lg-5 no-float no-padding center-block">
+                      <form class="login-form" method="post" action="{% url 'accounts:user_login' %}">
+                          {% csrf_token %}
+                          <div class="form-group">
+                              <input type="text" class="input-text input-large full-width" placeholder="enter your username" name="username">
+                          </div>
+                          <div class="form-group">
+                              <input type="password" class="input-text input-large full-width" placeholder="enter your password" name="password">
+                          </div>
+                            <div class="form-group">
+                              <p style="text-align:left"><a href={% url 'password_reset' %}>Forgot Password</a></p>
+                          </div>
+                          <input type="submit" class="btn-large full-width btn btn-primary" value="LOGIN TO YOUR ACCOUNT">
+                      </form>
+                  </div>
+              </div>
+          </div>
+      </section>
+      <footer id="footer">
+            <div class="footer-wrapper">
+                <div class="container">
+                    <nav id="main-menu" role="navigation" class="inline-block hidden-mobile">
+                      <ul class="menu">
+                          <li class="menu-item-has-children {% if home %}active{% endif %}">
+                              <a href={% url 'index' %}>Home</a>
+                          </li>
+                          <li class="menu-item-has-children megamenu-menu {% if place %}active{% endif %}">
+                              <a href="#">Destinations</a>
+                              <div class="megamenu-wrapper container" data-items-per-column="8">
+                                  <div class="megamenu-holder">
+                                      <ul class="megamenu">
+                                        {% for tt in titletype %}
+                                          <li class="menu-item-has-children">
+                                              <a href="#">{{ tt.dtype }}</a>
+                                              <ul class="clearfix">
+                                                {% for dt in tt.places.all %}
+                                                {% if True %}
+                                                  <li><a href='{% url 'destination' dt.name %}'>{{ dt.name|upper }}</a></li>
+                                                {% endif %}
+                                                {% endfor %}
+                                              </ul>
+                                          </li>
+                                        {% endfor %}
+                                      </ul>
+                                  </div>
+                              </div>
+                          </li>
+                          <li class="menu-item-has-children {% if insertme == 'Membership Plans' %}active{% endif %} ">
+                              <a href={% url 'plans' %}>membership plans</a>
+                          </li>
+                          <li class="menu-item-has-children {% if insertme == 'Agent Benefits' %}active{% endif %}">
+                              <a href={% url 'agentben' %}>agent benefits</a>
+                          </li>
+                          <li class="menu-item-has-children {% if insertme == 'Client Benefits' %}active{% endif %}">
+                              <a href={% url 'clientben' %}>client benefits</a>
+                          </li>
+                          <li class="menu-item-has-children {% if insertme == 'About Us' %}active{% endif %}">
+                              <a href={% url 'about' %}>about us</a>
+                          </li>
+                          <li class="menu-item-has-children active">
+                            {% if user.is_authenticated %}
+                            {% if user.is_agent %}
+                            <a href="{% url 'agent:agentdash' %}">My Account</a>
+                            {% elif user.is_client%}
+                            <a href="{% url 'client:clientdash' %}">My Account</a>
+                            {% elif user.is_superuser %}
+                            <a href={% url 'admin:index' %}>Admin Panel</a>
+                            {% endif %}
+                            <ul>
+                              <li class="menu-item-has-children">
+                                <a href={% url 'accounts:logout' %}>LOGOUT</a>
+                              </li>
+                            </ul>
+                            {% else %}
+                            <a href="#">SIGNUP</a>
+                            <ul>
+                                <li class="menu-item-has-children">
+                                    <a href={% url 'client:clientsignup' %}>CLIENT REGISTRAION</a>
+                                    <!-- <ul>
+                                        <li><a href="footer-style1.html">LOGIN</a></li>
+                                        <li><a href="footer-style2.html">SIGN UP</a></li>
+                                    </ul> -->
+                                </li>
+                                <li class="menu-item-has-children">
+                                    <a href={% url 'agent:agentsignup' %}>AGENT REGISTRATION</a>
+                                    <!-- <ul>
+                                        <li><a href={% url 'client:clientsignup' %}>AS CLIENT</a></li>
+                                        <li><a href={% url 'agent:agentsignup' %}>AS AGENT</a></li>
+                                    </ul> -->
+                                </li>
+                            </ul>
+                            {% endif %}
+                          </li>
+                          <li class="menu-item-has-children {% if insertme == 'Contact Us' %}active{% endif %}">
+                              <a href={% url 'contact' %}>contact us</a>
+                          </li>
+                      </ul>
+                    </nav>
+                    <div class="copyright">
+                        <p>&copy; 2018 Good Luck Yatra. Develop & Design By: Cosmo Info Solutions
+</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Javascript -->
+    <script type="text/javascript" src={% static "js/jquery-1.11.1.min.js" %}></script>
+    <script type="text/javascript" src={% static "js/jquery.noconflict.js" %}></script>
+    <script type="text/javascript" src={% static "js/modernizr.2.7.1.min.js" %}></script>
+    <script type="text/javascript" src={% static "js/jquery-migrate-1.2.1.min.js" %}></script>
+    <script type="text/javascript" src={% static "js/jquery.placeholder.js" %}></script>
+    <script type="text/javascript" src={% static "js/jquery-ui.1.10.4.min.js" %}></script>
+
+    <!-- Twitter Bootstrap -->
+    <script type="text/javascript" src={% static "js/bootstrap.js" %}></script>
+
+    <script type="text/javascript">
+        var enableChaser = 0;
+    </script>
+    <!-- parallax -->
+    <script type="text/javascript" src={% static "js/jquery.stellar.min.js" %}></script>
+
+    <!-- waypoint -->
+    <script type="text/javascript" src={% static "js/waypoints.min.js" %}></script>
+
+    <!-- load page Javascript -->
+    <script type="text/javascript" src={% static "js/theme-scripts.js" %}></script>
+    <script type="text/javascript" src={% static "js/scripts.js" %}></script>
+
+</body>
+</html>

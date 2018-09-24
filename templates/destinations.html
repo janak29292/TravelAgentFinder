@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% block content %}
+        <section id="content">
+            <div class="container">
+              <div class="block">
+                  <div id="gallery_style1" class="flexslider photo-gallery style1" data-animation="slide" data-sync="#carousel_style1">
+                      <ul class="slides">
+                        {% for post in place.img.all %}
+                          <li><img src="{{ post.img.url }}" alt="" /></li>
+                        {% endfor %}
+                      </ul>
+                  </div>
+                  <div id="carousel_style1" class="flexslider image-carousel style1" data-animation="slide" data-item-width="70" data-item-margin="10" data-sync="#gallery_style1">
+                      <ul class="slides">
+                        {% for post in place.img.all %}
+                          <li><img src="{{ post.img.url }}" alt="" /></li>
+                        {% endfor %}
+                      </ul>
+                  </div>
+              </div>
+            </div>
+            <div class="container">
+              <div class="tab-container box">
+                  <ul class="tabs">
+                      <li class="active"><a href="#satisfied-customers" data-toggle="tab">DESCRIPTION</a></li>
+                      {% if place.dtype.dtype == "Theme Destinations" %}
+                      <li><a href="#tours-suggestions" data-toggle="tab">{{ place.name }}</a></li>
+                      {% else %}
+                      <li><a href="#tours-suggestions" data-toggle="tab">tour suggestions</a></li>
+                      {% endif %}
+                      {% if place.reach %}
+                      <li><a href="#careers" data-toggle="tab">How To Reach</a></li>
+                      {% endif %}
+                  </ul>
+                  <div class="tab-content">
+                      <div class="tab-pane fade in active" id="satisfied-customers">
+                          {# <img src="http://placehold.it/140x140" alt="" class="pull-left" /> #}
+                          <h2>{{ place }}</h2>
+                          <p>{{ place.descrip|safe }}</p>
+                      </div>
+                      <div class="tab-pane fade" id="tours-suggestions">
+                        {% if place.dtype.dtype == "Theme Destinations" %}
+                        <h2>Top {{ place.name }} in India</h2>
+                        {% else %}
+                        <h2>Tourist Attractions</h2>
+                        {% endif %}
+                        <div class="row image-box style2">
+                          {% for att in place.attrct.all %}
+                        <hr><div>
+                            <article class="box">
+                                <figure>
+                                    <img src={{ att.pic.url }} alt="" width="270" height="192" />
+                                </figure>
+                                <div class="details">
+                                    <h4>{{ att.title }}</h4><hr>
+                                    <p>{{ att.detl|safe }}</p>
+                                </div>
+                            </article>
+                        </div>
+                        {% endfor %}
+                    </div>
+                      </div>
+                      <div class="tab-pane fade" id="careers">
+                          {{ place.reach|safe }}
+                      </div>
+                  </div>
+              </div>
+            </div>
+
+        </section>
+{% endblock %}

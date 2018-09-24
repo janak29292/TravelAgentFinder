@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block content %}
+<section id="content" style="padding-top:0px">
+<div class="container">
+<!--  Accordion -->
+  <div class="toggle-container box" id="accordion1">
+                        {% for l in loa %}
+                          <div class="panel style2">
+                            <h4 class="panel-title">
+                              <a class="collapsed" href="#l{{ l.pk }}" data-toggle="collapse" data-parent="#accordion1"><h2><b>Agent : </b>{{ l.user.first_name }} {{ l.user.last_name }}</h2> <p> <b>Username : </b>{{ l.user.user.username }}</p></a>
+                            </h4>
+                            <div class="panel-collapse collapse" id="l{{ l.pk }}">
+                              <div class="panel-content">
+                                <h2> <b>Agent Information </b></h2><hr>
+                                <h4> <b>Name :</b> {{ l.user.first_name }} {{ l.user.last_name }}</h4>
+                                <h4> <b>Contact Number :</b> {{ l.user.phone }}</h4>
+                                <h4> <b>Email :</b> {{ l.user.user.email }}</h4>
+                                <h4> <b>Address :</b> {{ l.user.address }}</h4>
+                                <h4> <b>Occupation :</b> {{ l.user.occupation }}</h4>
+                                <h4> <b>Date of Birth :</b> {{ l.user.date_of_birth }}</h4>
+                                <h4> <b>Company Name :</b> {{ l.company_name }}</h4>
+                                <h4> <b>Pending Enquiries :</b> {{ l.pend }}</h4>
+                                <h4> <b>Completed Enquiries :</b> {{ l.complete_all }}</h4>
+                                <h4> <b>Rated :</b> {% if l.rating %} {{ l.rating|floatformat:1 }} /5.0 stars <b> by </b> {{ l.rated }} clients {% else %} Not Yet Rated !!{% endif %}</h4>
+                            </div><!-- end content -->
+                          </div>
+                        </div>
+                        {% empty %}
+                        <h4>No Agents</h4>
+                        {% endfor %}
+                      </div>
+</div>
+</section>
+{% endblock %}

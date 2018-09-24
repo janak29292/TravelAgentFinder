@@ -1,0 +1,217 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block extrahead %}
+  <style media="screen">
+  .global-map-area {
+    background: url({% static "images/h1.jpg" %}) no-repeat; }
+    .global-map-area .description p {
+      color: #7c9abd; }
+    .global-map-area .description h1, .global-map-area .description h2, .global-map-area .description h3, .global-map-area .description h4, .global-map-area .description h5, .global-map-area .description h6 {
+      color: #fff; }
+  </style>
+{% endblock %}
+{% block content %}
+        <div id="slideshow">
+            <div class="fullwidthbanner-container">
+                <div class="revolution-slider" style="height: 0; overflow: hidden;">
+                    <ul>    <!-- SLIDE  -->
+                        <!-- Slide1 -->
+                        <li data-transition="zoomin" data-slotamount="7" data-masterspeed="1500">
+                            <!-- MAIN IMAGE -->
+                            <img src='{% static "images/sliderhome.jpg" %}' alt="">
+                        </li>
+
+                        <!-- Slide2 -->
+                        <li data-transition="zoomin" data-slotamount="7" data-masterspeed="1500">
+                            <!-- MAIN IMAGE -->
+                            <img src='{% static "images/slider2.jpg" %}' alt="">
+                        </li>
+
+                        <!-- Slide3 -->
+                        <li data-transition="zoomin" data-slotamount="7" data-masterspeed="1500">
+                            <!-- MAIN IMAGE -->
+                            <img src='{% static "images/slider3.jpg" %}' alt="">
+                        </li>
+                        <!-- Slide3 -->
+                        <li data-transition="zoomin" data-slotamount="7" data-masterspeed="1500">
+                            <!-- MAIN IMAGE -->
+                            <img src='{% static "images/slider4.jpg" %}' alt="">
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <section id="content" style="padding-top:0px;">
+            <!-- Honeymoon -->
+            <div class="honeymoon section global-map-area promo-box parallax" data-stellar-background-ratio="0.5">
+                <div class="container">
+                    <div class="col-sm-6 content-section description pull-right">
+                        <h1 class="title">Popular Destinations for Honeymoon</h1>
+                        <div class="row places image-box style9">
+                            <div class="col-xs-4">
+                                <article class="box">
+                                    <figure>
+                                        <a href="/destination/Paris/" title="" class="hover-effect yellow middle-block animated" data-animation-type="fadeInUp" data-animation-duration="1">
+                                            <img src={% static "images/h2.jpg" %} alt="" /></a>
+                                    </figure>
+                                    <div class="details">
+                                        <h4 class="box-title">Paris</h4>
+                                        <a href="/destination/Paris/" title="" class="button">SEE ALL</a>
+                                    </div>
+                                </article>
+                            </div>
+                            <div class="col-xs-4">
+                                <article class="box">
+                                    <figure>
+                                        <a href="/destination/Honeymoon Destinations/" title="" class="hover-effect yellow middle-block animated" data-animation-type="fadeInUp" data-animation-duration="1" data-animation-delay="0.4">
+                                          <img src={% static "images/h3.jpg" %} alt="" /></a>
+                                    </figure>
+                                    <div class="details">
+                                        <h4 class="box-title">Greece</h4>
+                                        <a href="/destination/Honeymoon Destinations/" title="" class="button">SEE ALL</a>
+                                    </div>
+                                </article>
+                            </div>
+                            <div class="col-xs-4">
+                                <article class="box">
+                                    <figure>
+                                        <a href="/destination/Honeymoon Destinations/" title="" class="hover-effect yellow middle-block animated" data-animation-type="fadeInUp" data-animation-duration="1" data-animation-delay="0.8">
+                                          <img src={% static "images/h4.jpg" %} alt="" /></a>
+                                    </figure>
+                                    <div class="details">
+                                        <h4 class="box-title">Australia</h4>
+                                        <a href="/destination/Honeymoon Destinations/" title="" class="button">SEE ALL</a>
+                                    </div>
+                                </article>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 image-container no-margin">
+                        <img src={% static "images/h5.jpg" %} alt="" class="animated" data-animation-type="fadeInUp" data-animation-duration="2">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Did you Know? section -->
+            <div class="offers section">
+                <div class="container">
+                    <h1 class="text-center">Popular Destinations</h1>
+                    <p class="col-xs-9 center-block no-float text-center"></p>
+                    <div class="row image-box style2">
+                        <div class="col-md-6">
+                            <article class="box">
+                                <figure class="animated" data-animation-type="fadeInLeft" data-animation-duration="1">
+                                    <a href="/destination/London/" title=""><img src={% static "images/londonSlider.jpg" %} alt="" width="270" height="192" /></a>
+                                </figure>
+                                <div class="details">
+                                    <h4>London</h4>
+                                    <p>Tourist attractions in London are abundant and suitable for all ages, interests and moods. If you seek to relax or party or indulge in adventure, London is a touristy bliss.</p>
+                                    <a href="/destination/London/" title="" class="button">SEE ALL</a>
+                                </div>
+                            </article>
+                        </div>
+                        <div class="col-md-6">
+                            <article class="box">
+                                <figure class="animated" data-animation-type="fadeInLeft" data-animation-duration="1" data-animation-delay="0.4">
+                                    <a href="/destination/Goa/" title=""><img src={% static "images/Goa_1.jpg" %} alt="" width="270" height="192" /></a>
+                                </figure>
+                                <div class="details">
+                                    <h4>Goa</h4>
+                                    <p>Tourist attractions in Goa are abundant and suitable for all ages, interests and moods. If you seek to relax or party or indulge in adventure, Goa is a touristy bliss.</p>
+                                    <a href="/destination/Goa/" title="" class="button">SEE ALL</a>
+                                </div>
+                            </article>
+                        </div>
+                        <div class="col-md-6">
+                            <article class="box">
+                                <figure class="animated" data-animation-type="fadeInLeft" data-animation-duration="1">
+                                    <a href="/destination/Rajasthan/" title=""><img src={% static "images/rajasthan-tour-package.jpg" %} alt="" width="270" height="192" /></a>
+                                </figure>
+                                <div class="details">
+                                    <h4>Rajasthan</h4>
+                                    <p>Rajasthan, known formerly by the name Rajputana or the land of the kings, is the largest state in the republic of India. </p>
+                                    <a href="/destination/Rajasthan/" title="" class="button">SEE ALL</a>
+                                </div>
+                            </article>
+                        </div>
+                        <div class="col-md-6">
+                            <article class="box">
+                                <figure class="animated" data-animation-type="fadeInLeft" data-animation-duration="1" data-animation-delay="0.4">
+                                    <a href="/destination/Adventure Destinations/" title=""><img src={% static "images/adventure-watersports.jpg" %} alt="" width="270" height="192" /></a>
+                                </figure>
+                                <div class="details">
+                                    <h4>Adventure Destinations</h4>
+                                    <p> It is not difficult to decide where to plan adventure holidays in India; the only thing that is required is your DARING ATTITUDE!! </p>
+                                    <a href="/destination/Adventure Destinations/" title="" class="button">SEE ALL</a>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Features section -->
+            <div class="features section global-map-area parallax" data-stellar-background-ratio="0.5">
+                <div class="container">
+                    <div class="row image-box style7">
+                        <div class="col-sms-6 col-sm-6 col-md-3">
+                            <article class="box">
+                                <figure class="middle-block">
+                                    <img src={% static "images/ABTUS.jpg" %} alt="" class="middle-item" />
+                                    <span class="opacity-wrapper"></span>
+                                </figure>
+                                <div class="details">
+                                    <h4><a href={% url 'about' %}>ABOUT COMPANY</a></h4>
+                                    <p>
+                                        GOODLUCK YATRA is a website portal. We offer Airline Ticketing Services, Railway Ticketing Services, Passport & Visa Services, Travel Insurance Services, Cruise Services, Bus Ticketing Services, Forex Exchange Services, Hotel Booking Services, Car & Coach Services and event management services.
+                                    </p>
+                                </div>
+                            </article>
+                        </div>
+                        <div class="col-sms-6 col-sm-6 col-md-3">
+                             <article class="box">
+                                <figure class="middle-block">
+                                    <img src={% static "images/MEMBER.png" %} alt="" class="middle-item" />
+                                    <span class="opacity-wrapper"></span>
+                                </figure>
+                                <div class="details">
+                                    <h4><a href={% url 'plans' %}>AGENT MEMBERSHIP</a></h4>
+                                    <p>
+                                        As long as you keep delivering value to your members – in the form of content, resources and ongoing investment in your product – they’ll keep giving value to you in the form of their continued subscription payments.The webinar format is also a great way of encouraging discussion among agents.
+                                    </p>
+                                </div>
+                            </article>
+                        </div>
+                        <div class="col-sms-6 col-sm-6 col-md-3">
+                             <article class="box">
+                                <figure class="middle-block">
+                                    <img src={% static "images/b1.jpg" %} alt="" class="middle-item" />
+                                    <span class="opacity-wrapper"></span>
+                                </figure>
+                                <div class="details">
+                                    <h4><a href={% url 'agentben' %}>AGENT BENEFITS</a></h4>
+                                    <p>
+                                        UNLIMITED QUERIES, SUPPORT SERVICES, UNLIMITED INCOME FROM OUR WEB PORTAL, GENUINE QUERY, FREE ADVERTISEMENT IN OUR WEBSITES, 24/7 CHAT SERVICE BY OUR PROVIDER, ALL INDIA TRAVEL DATA IN YOUR WEB PANEL, EVERYDAY EARN PAYTM CASH.
+                                    </p>
+                                </div>
+                            </article>
+                        </div>
+                        <div class="col-sms-6 col-sm-6 col-md-3">
+                             <article class="box">
+                                <figure class="middle-block">
+                                    <img src={% static "images/b2.jpg" %} alt="" class="middle-item" />
+                                    <span class="opacity-wrapper"></span>
+                                </figure>
+                                <div class="details">
+                                    <h4><a href={% url 'clientben' %}>CUSTOMER BENEFITS</a></h4>
+                                    <p>
+                                        YOU WILL FIND OUR RATE UP TO 50% LESS THAN THE OTHER WEBSITES AND TRAVEL AGENTS. 24/7 SUPPORT SERVICES AND REPLY. EARN 50 REWARD POINTS AT THE TIME OF JOINING AND 10 REWARD POINTS BY REFERRING . CHANCE TO WIN DAILY PAYTM CASH.
+                                    </p>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+{% endblock %}

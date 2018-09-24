@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% block content %}
+  <section id="content" >
+    <div class="container">
+      <div class="block">
+        <h2 class="entry-title" style="margin-left:450px !important; font-weight:bolder !important">GET IN TOUCH WITH US</h2>
+        <iframe width="100%" height="450" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?q=place_id:ChIJs6ZZ0H_9mzkRVyiPax7fpYg&key=AIzaSyCHcXZaqa3tNVg6Lz9uSukXQUk5DER4YBY" allowfullscreen></iframe>
+      </div>
+      <div class="block clearfix">
+                        <div class="col-md-4">
+                            <div class="icon-box style5">
+                                <i class="soap-icon-phone"></i>
+                                <div class="description">
+                                    <small>We are on 24/7</small>
+                                    <h5>Local: 1-800-123-HELLO</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="icon-box style5">
+                                <i class="soap-icon-message"></i>
+                                <div class="description">
+                                    <small>Send us email on</small>
+                                    <h5>info@travelagentfinder.in</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="icon-box style5">
+                                <i class="soap-icon-address"></i>
+                                <div class="description">
+                                    <small>meet us at</small>
+                                    <h5>Kapoorthala,Lucknow</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+      <div>
+
+                            <div class="contact-form-container white-bg">
+                              {% if posted %}
+                              <h2>Your message has been Posted</h2>
+                              {% else %}
+                              <h2>Send Us Your Details</h2>
+                                <form class="contact-form" method="post" role="form">
+                                  {% csrf_token %}
+                                    <div class="row form-group">
+                                      <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label for="name">your name</label>
+                                            <input type="text" class="input-text full-width" id="name" placeholder="" name="name" required/>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="email">email address</label>
+                                            <input type="email" class="input-text full-width" id="email" placeholder="" name="email" required/>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="subject">subject</label>
+                                            <input type="text" class="input-text full-width" id="subject" placeholder="" name="subject" required/>
+                                        </div>
+                                      </div>
+
+                                    <div class="col-sm-8">
+                                        <label>message</label>
+                                        <textarea class="full-width" rows="6" name="message" required></textarea>
+                                    </div>
+                                    </div>
+                                    <div class="form-group clearfix">
+                                        <div class="col-sms-offset-6 col-sm-offset-6 col-md-offset-8 col-lg-offset-9">
+                                          <button type="submit" class="button btn-medium full-width">SEND MESSAGE</button>
+                                        </div>
+                                    </div>
+                                </form>
+                                {% endif %}
+                            </div>
+
+    </div>
+  </section>
+{% endblock %}

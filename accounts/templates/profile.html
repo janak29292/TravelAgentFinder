@@ -1,0 +1,167 @@
+{% extends "base.html" %}
+{% block extrahead %}
+  <style media="screen">
+  table{
+    width: 100%;
+  }
+  /* td{
+    border:1px solid black;
+  } */
+  #c1{
+    width: 20%;
+  }
+  #c2{
+    width: 70%;
+  }
+  #c3{
+    width: 10%;
+  }
+  #c4{
+    width: 90%;
+  }
+  #c5{
+    width: 15%;
+  }
+  </style>
+{% endblock %}
+{% block content %}
+<section id="content">
+  <div class="container" style="background-color: white;border:20px solid white;">
+    {% if user.is_staff %}
+    <a href={% url 'accounts:listofclients' %}><button class="btn btn-primary" type="button" name="button">List of Clients</button> </a><br><br>
+    <a href={% url 'accounts:listofagents' %}><button class="btn btn-primary" type="button" name="button">List of Agents</button></a><br><br>
+    <a href={% url 'accounts:adminhotellist' %}><button class="btn btn-primary" type="button" name="button">Enquiry Lists</button> </a><br><br>
+    <a href={% url 'accounts:contactmsgs' %}><button class="btn btn-primary" type="button" name="button">Contact Us Messages</button> </a><br><br>
+    <a href={% url 'accounts:editpassword' %}><button class="btn btn-warning" type="button" name="button">Change Password</button> </a><br><br>
+    <a href={% url 'admin:index' %}><button class="btn btn-danger" type="button" name="button">Django Administrator</button> </a>
+    <p style="color:red">Note: Deletion of data in django administrator is DISABLED. Only click on this link if you know what you are doing..</p>
+    {% else %}
+    <table>
+      <tr>
+        <td id="c2"><h1>Profile Information</h1></td>
+        {% if user.is_agent %}
+        <td id="c5"><a href={% url 'agent:agenthotellist' %}><button class="btn btn-info" type="button" name="button">Enquiry List as Agent</button> </a> </td>
+        {% else %}
+        <td id="c5"></td>
+        {% endif %}
+        <td id="c5"><a href={% url 'client:enqhotel' %}><button class="btn btn-info" type="button" name="button">Enquiry</button> </a> </td>
+      </tr>
+      <tr>
+        <td style="height:25px;"> </td>
+      </tr>
+    </table>
+    <table>
+      <tr>
+        <td id="c1"><h2>Username</h2></td>
+        <td id="c2"><h3> {{ user.username }}</h3></td>
+        <td id="c3"> </td>
+      </tr>
+      <tr>
+        <td id="c1"><h2>Name</h2></td>
+        <td id="c2"><h3>{{ user.client.first_name }} {{ user.client.last_name }}</h3></td>
+        <td id="c3"><a href={% url 'accounts:editname' %}><button class="btn btn-default" type="button" name="button">Edit</button></a> </td>
+      </tr>
+      <tr>
+        <td id="c1"><h2>Email</h2></td>
+        <td id="c2"><h3> {{ user.email }}</h3></td>
+        <td id="c3"><a href={% url 'accounts:editemail' %}><button class="btn btn-default" type="button" name="button">Edit</button></a> </td>
+      </tr>
+      <tr>
+        <td id="c1"><h2>Phone No.</h2> </td>
+        <td id="c2"><h3>{{ user.client.phone }}</h3></td>
+        <td id="c3"><a href={% url 'accounts:editphone' %}><button class="btn btn-default" type="button" name="button">Edit</button></a> </td>
+      </tr>
+      <tr>
+        <td id="c1"><h2>Date Of Birth</h2></td>
+        <td id="c2"><h3>{{ user.client.date_of_birth}}</h3></td>
+        <td id="c3"><a href={% url 'accounts:editdob' %}><button class="btn btn-default" type="button" name="button">Edit</button></a> </td>
+      </tr>
+      <tr>
+        <td id="c1"><h2>Address</h2></td>
+        <td id="c2"><h3> {{ user.client.address }}</h3></td>
+        <td id="c3"><a href={% url 'accounts:editaddress' %}><button class="btn btn-default" type="button" name="button">Edit</button></a> </td>
+      </tr>
+      <tr>
+        <td id="c1"><h2>Occupation</h2></td>
+        <td id="c2"><h3>{{ user.client.occupation }}</h3></td>
+        <td id="c3"><a href={% url 'accounts:editocc' %}><button class="btn btn-default" type="button" name="button">Edit</button></a> </td>
+      </tr>
+      <tr>
+        <td><a href={% url 'accounts:editpassword' %}><button class="btn btn-warning" type="button" name="button">Change Password</button> </a></td>
+      </tr>
+      {% if user.is_agent %}
+      <tr>
+        <td style="height:25px;"> </td>
+      </tr>
+      <tr>
+        <td><h1>Agent Information</h1></td>
+      </tr>
+      <tr>
+        <td style="height:25px;"> </td>
+      </tr>
+      <tr>
+        <td id="c1"><h2>Company Name</h2></td>
+        <td id="c2"><h3>{{ user.client.agent.company_name }}</h3></td>
+        <td id="c3"><a href={% url 'accounts:editcompany' %}><button class="btn btn-default" type="button" name="button">Edit</button></a> </td>
+      </tr>
+      {% endif %}
+    </table>
+    {% if user.is_agent %}
+    <table>
+      <tr>
+        <td style="height:25px;"> </td>
+      </tr>
+      <tr>
+        <td id="c4"><h2>Pending Enquiries</h2></td>
+        <td id="c3"><h3>{{ user.client.agent.pend }}</h3></td>
+      </tr>
+      <tr>
+        <td id="c4"><h2>Total Completed Enquiries</h2></td>
+        <td id="c3"><h3>{{ user.client.agent.complete_all }}</h3></td>
+      </tr>
+      <tr>
+        <td id="c4"><h2>Completed Tour Enquiries</h2></td>
+        <td id="c3"><h3>{{ user.client.agent.complete_tour }}</h3></td>
+      </tr>
+      <tr>
+        <td id="c4"><h2>Completed Hotel Enquiries</h2></td>
+        <td id="c3"><h3>{{ user.client.agent.complete_hotel }}</h3></td>
+      </tr>
+      <tr>
+        <td id="c4"><h2>Completed Train Enquiries</h2></td>
+        <td id="c3"><h3>{{ user.client.agent.complete_train }}</h3></td>
+      </tr>
+      <tr>
+        <td id="c4"><h2>Completed Flight Enquiries</h2></td>
+        <td id="c3"><h3>{{ user.client.agent.complete_air }}</h3></td>
+      </tr>
+      <tr>
+        <td id="c4"><h2>Completed Bus Enquiries</h2></td>
+        <td id="c3"><h3>{{ user.client.agent.complete_bus }}</h3></td>
+      </tr>
+      <tr>
+        <td id="c4"><h2>Completed Passport and Visa Enquiries</h2></td>
+        <td id="c3"><h3>{{ user.client.agent.complete_visa }}</h3></td>
+      </tr>
+      <tr>
+        <td id="c4"><h2>Completed Rental Vehicle Enquiries</h2></td>
+        <td id="c3"><h3>{{ user.client.agent.complete_car }}</h3></td>
+      </tr>
+      <tr>
+        <td id="c4"><h2>Completed Travel Insurance Enquiries</h2></td>
+        <td id="c3"><h3>{{ user.client.agent.complete_insrnce }}</h3></td>
+      </tr>
+      <tr>
+        <td id="c4"><h2>Rating</h2></td>
+        <td id="c3"><h3>{{ user.client.agent.rating|floatformat:1 }}/5.0 stars</h3></td>
+      </tr>
+      <tr>
+        <td id="c4"><h2>Rated By</h2></td>
+        <td id="c3"><h3>{{ user.client.agent.rated }} clients</h3></td>
+      </tr>
+    </table>
+    {% endif %}
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% block content %}
+<section id="content" style="padding-top:0px">
+  <div class="container">
+  <div class="tab-container box">
+        <ul class="tabs">
+          <li><a href={% url 'agent:agenttourlist' %} >Tours</a></li>
+          <li><a href={% url 'agent:agenthotellist' %} >Hotels</a></li>
+          <li><a href={% url 'agent:agenttrainlist' %} >Trains</a></li>
+          <li><a href={% url 'agent:agentairlist' %} >Flights</a></li>
+          <li><a href={% url 'agent:agentbuslist' %} >Bus</a></li>
+          <li><a href={% url 'agent:agentvisalist' %} >Passport & Visa</a></li>
+          <li class="active"><a href={% url 'agent:agentcarlist' %} >Rental Vehicles</a></li>
+          <li><a href={% url 'agent:agentinsrncelist' %} >Travel Insurance</a></li>
+        </ul>
+          <div class="tab-pane fade in active">
+                  <div class="tab-container full-width-style white-bg">
+                    <ul class="tabs">
+                      <li class="active"><a href={% url 'agent:agentcarlist' %} ><i class="soap-icon-doc-plus circle"></i>New Enquiries</a></li>
+                      <li><a href={% url 'agent:agentcarpending' %} ><i class="soap-icon-doc-minus circle"></i>Pending Enquiries</a></li>
+                      <li><a href={% url 'agent:agentcardone' %} ><i class="soap-icon-stories circle"></i>Accepted Enquiries</a></li>
+                    </ul>
+                    <div class="tab-content">
+                      <div class="tab-pane fade in active" id="first-tab">
+                        <h1>List of Enquiries</h1>
+                        <!--  Accordion -->
+                        <div class="toggle-container box" id="accordion1">
+                          {% for cl in clist %}
+                            <div class="panel style2">
+                              <h4 class="panel-title">
+                                <a class="collapsed" href="#l{{ cl.pk }}" data-toggle="collapse" data-parent="#accordion1"><h2><b>Client : </b>{{ cl.client }}</h2> <p><b>Enquired : </b> {{ cl.created }}</p>
+                                  {% for k in cl.carreply.all %}{% if k.agent.user.user == user %}{% if k.replied %} <span>(Replied)</span> {% endif %}{% endif %}{% endfor %}
+                                </a>
+                              </h4>
+                              <div class="panel-collapse collapse" id="l{{ cl.pk }}">
+                                <div class="panel-content">
+                                  <h4> <b>Tour Type :</b> {{ cl.tour_type }}</h4>
+                                  <h4> <b>Type of Vehicle :</b> {{ cl.type_of_vehicle }}</h4>
+                                  <h4> <b>Book From :</b> {{ cl.book_from }}</h4>
+                                  <h4> <b>Book Upto :</b> {{ cl.book_upto }}</h4>
+                                  <h4> <b>Travel Start Location :</b> {{ cl.travel_start_location }}</h4>
+                                  <h4> <b>Destination :</b> {{ cl.destination }}</h4>
+                                  <h4> <b>Numbers of Vehicles Required :</b> {{ cl.number_of_vehicles_required }}</h4>
+                                  <h4> <b>Additional Information :</b> {{ cl.additional_information }}</h4>
+                                  <h4> <b>Enquired on :</b> {{ cl.created }}</h4><hr>
+                                  <a {% for k in cl.carreply.all %}{% if k.agent.user.user == user %}
+                                  style="pointer-events: none;"
+                                  {% endif %}
+                                  {% endfor %}
+                                  href='{% url 'agent:agentcarrply' cl.pk %}'> <button {% for k in cl.carreply.all %}{% if k.agent.user.user == user %}disabled {% endif %}{% endfor %}class="btn btn-primary "type="button" name="button">Reply</button> </a>
+                                  {% for k in cl.carreply.all %}{% if k.agent.user.user == user %}{% if k.replied %} <h4>Replied At <b> {{ k.replied }} </b></h4>{% endif %}{% endif %}{% endfor %}
+                              </div><!-- end content -->
+                            </div>
+                          </div>
+                          {% empty %}
+                          <h4>No New Enquiries</h4>
+                          {% endfor %}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+{% endblock %}

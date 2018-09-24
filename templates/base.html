@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<!--[if IE 8]>          <html class="ie ie8"> <![endif]-->
+<!--[if IE 9]>          <html class="ie ie9"> <![endif]-->
+<!--[if gt IE 9]><!-->  <html> <!--<![endif]-->
+<head>
+    <!-- Page Title -->
+    <title>TravelAgentFinder | Travel and Tourism</title>
+
+    <link href={% static "images/favicon.png" %} rel="shortcut icon" type="image/x-icon">
+
+    <!-- Meta Tags -->
+    <meta charset="utf-8">
+    <meta name="keywords" content="HTML5 Template" />
+    <meta name="description" content="Travelo | Responsive HTML5 Travel Template">
+    <meta name="author" content="SoapTheme">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Theme Styles -->
+    <link rel="stylesheet" href={% static "css/bootstrap.min.css" %}>
+    <link rel="stylesheet" href={% static "css/font-awesome.min.css" %}>
+    <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href={% static "css/animate.min.css" %}>
+
+    <!-- Current Page Styles -->
+    <link rel="stylesheet" type="text/css" href={% static "components/revolution_slider/css/settings.css" %} media="screen" />
+    <link rel="stylesheet" type="text/css" href={% static "components/revolution_slider/css/style.css" %} media="screen" />
+    <link rel="stylesheet" type="text/css" href={% static "components/jquery.bxslider/jquery.bxslider.css" %} media="screen" />
+    <link rel="stylesheet" type="text/css" href={% static "components/flexslider/flexslider.css" %} media="screen" />
+
+
+    <!-- Main Style -->
+    <link id="main-style" rel="stylesheet" href={% static "css/style.css" %}>
+
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href={% static "css/custom.css" %}>
+
+    <!-- Updated Styles -->
+    <link rel="stylesheet" href={% static "css/updates.css" %}>
+
+    <!-- Responsive Styles -->
+    <link rel="stylesheet" href={% static "css/responsive.css" %}>
+    {% block extrahead %}
+
+    {% endblock %}
+
+    <!-- CSS for IE -->
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" type="text/css" href="css/ie.css" />
+    <![endif]-->
+
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script type='text/javascript' src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+      <script type='text/javascript' src="http://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.js"></script>
+    <![endif]-->
+    <!-- Javascript Page Loader -->
+    <!-- <script type="text/javascript" src={% static "js/pace.min.js" %} data-pace-options='{ "ajax": false }'></script>
+    <script type="text/javascript" src={% static "js/page-loading.js" %}></script> -->
+</head>
+<body>
+    <div id="page-wrapper">
+        <header id="header" class="navbar-static-top">
+            <div class="topnav hidden-xs">
+                <div class="container">
+                    <ul class="quick-menu pull-left">
+                      {% if user.is_agent %}
+                      <li><a href={% url 'client:enqhotel' %}>Enquiry</a></li>
+                      <li><a href={% url 'agent:agenthotellist' %}>Enquiry List as Agent</a></li>
+                      {% elif user.is_client %}
+                        <li><a href={% url 'client:enqhotel' %}>Enquiry</a></li>
+                      {% endif %}
+                    </ul>
+                    <ul class="quick-menu pull-right">
+                        {% if user.is_authenticated %}
+                        <li><a href={% url 'accounts:userprofile' %}>Profile</a> </li>
+                        {% else %}
+                        <li><a href={% url 'accounts:user_login' %}>Login</a> </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+
+            <div class="main-header">
+
+                <a href="#mobile-menu-01" data-toggle="collapse" class="mobile-menu-toggle">
+                    Mobile Menu Toggle
+                </a>
+
+                <div class="container">
+                    <h1 class="logogly navbar-brand">
+                        <a href={% url 'index' %} title="Travelo - home">
+                            <img src={% static "images/logogly.png" %} alt="" />
+                        </a>
+                    </h1>
+
+                    <nav id="main-menu" role="navigation">
+                        <ul class="menu">
+                            <li class="menu-item-has-children {% if home %}active{% endif %}">
+                                <a href={% url 'index' %}>Home</a>
+                            </li>
+                            <li class="menu-item-has-children megamenu-menu {% if place %}active{% endif %}">
+                                <a href="#">Destinations</a>
+                                <div class="megamenu-wrapper container" data-items-per-column="8">
+                                    <div class="megamenu-holder">
+                                        <ul class="megamenu">
+                                          {% for tt in titletype %}
+                                            <li class="menu-item-has-children">
+                                                <a href="#">{{ tt.dtype }}</a>
+                                                <ul class="clearfix">
+                                                  {% for dt in tt.places.all %}
+                                                  {% if True %}
+                                                    <li><a href='{% url 'destination' dt.name %}'>{{ dt.name|upper }}</a></li>
+                                                  {% endif %}
+                                                  {% endfor %}
+                                                </ul>
+                                            </li>
+                                          {% endfor %}
+                                        </ul>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="menu-item-has-children {% if insertme == 'Membership Plans' %}active{% endif %} ">
+                                <a href={% url 'plans' %}>membership plans</a>
+                            </li>
+                            <li class="menu-item-has-children {% if insertme == 'Agent Benefits' %}active{% endif %}">
+                                <a href={% url 'agentben' %}>agent benefits</a>
+                            </li>
+                            <li class="menu-item-has-children {% if insertme == 'Client Benefits' %}active{% endif %}">
+                                <a href={% url 'clientben' %}>client benefits</a>
+                            </li>
+                            <li class="menu-item-has-children {% if insertme == 'About Us' %}active{% endif %}">
+                                <a href={% url 'about' %}>about us</a>
+                            </li>
+                            <li class="menu-item-has-children {% if acc == 'acc' %}active{% endif %}">
+                              {% if user.is_authenticated %}
+                              {% if user.is_client %}
+                              <a href="{% url 'accounts:userprofile' %}">My Account</a>
+                              {% elif user.is_superuser %}
+                              <a href={% url 'admin:index' %}>Admin Panel</a>
+                              {% elif user.is_staff %}
+                              <a href="{% url 'accounts:userprofile' %}">My Account</a>
+                              {% endif %}
+                              <ul>
+                                <li class="menu-item-has-children">
+                                  <a href={% url 'accounts:logout' %}>LOGOUT</a>
+                                </li>
+                              </ul>
+                              {% else %}
+                              <a href="#">Accounts</a>
+                              <ul>
+                                  <li class="menu-item-has-children">
+                                      <a href={% url 'accounts:user_login' %}>LOGIN</a>
+                                      <!-- <ul>
+                                          <li><a href="footer-style1.html">LOGIN</a></li>
+                                          <li><a href="footer-style2.html">SIGN UP</a></li>
+                                      </ul> -->
+                                  </li>
+                                  <li class="menu-item-has-children">
+                                      <a href=#>SIGNUP</a>
+                                      <ul>
+                                          <li><a href={% url 'client:clientsignup' %}>AS CLIENT</a></li>
+                                          <li><a href={% url 'agent:agentsignup' %}>AS AGENT</a></li>
+                                      </ul>
+                                  </li>
+                              </ul>
+                              {% endif %}
+                            </li>
+                            <li class="menu-item-has-children {% if insertme == 'Contact Us' %}active{% endif %}">
+                                <a href={% url 'contact' %}>contact us</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+
+                <nav id="mobile-menu-01" class="mobile-menu collapse">
+                    <ul id="mobile-primary-menu" class="menu">
+                      <li class="menu-item">
+                          <a href={% url 'index' %}>Home</a>
+                      </li>
+                      <li class="menu-item-has-children">
+                          <a href="#">Destinations</a>
+                                  <ul>
+                                    {% for tt in titletype %}
+                                      <li class="menu-item-has-children">
+                                          <a href="#">{{ tt.dtype }}</a>
+                                          <ul class="clearfix">
+                                            {% for dt in tt.places.all %}
+                                            {% if True %}
+                                              <li><a href='{% url 'destination' dt.name %}'>{{ dt.name|upper }}</a></li>
+                                            {% endif %}
+                                            {% endfor %}
+                                          </ul>
+                                      </li>
+                                    {% endfor %}
+                                  </ul>
+                          </li>
+                      <li class="menu-item">
+                          <a href={% url 'plans' %}>membership plans</a>
+                      </li>
+                      <li class="menu-item">
+                          <a href={% url 'agentben' %}>agent benefits</a>
+                      </li>
+                      <li class="menu-item">
+                          <a href={% url 'clientben' %}>client benefits</a>
+                      </li>
+                      <li class="menu-item">
+                          <a href={% url 'about' %}>about us</a>
+                      </li>
+                      <li class="menu-item-has-children">
+                        {% if user.is_authenticated %}
+                        {% if user.is_client%}
+                        <a href="{% url 'accounts:userprofile' %}">My Account</a>
+                        {% elif user.is_superuser %}
+                        <a href={% url 'admin:index' %}>Admin Panel</a>
+                        {% endif %}
+                        <ul>
+                          <a href={% url 'accounts:logout' %}>LOGOUT</a>
+                          <li class="menu-item-has-children">
+
+                          </li>
+                        </ul>
+                        {% else %}
+                        <a href="#">Accounts</a>
+                        <ul>
+                          <a href={% url 'accounts:user_login' %}>LOGIN</a>
+                            <li class="menu-item-has-children">
+
+                                <!-- <ul>
+                                    <li><a href="footer-style1.html">LOGIN</a></li>
+                                    <li><a href="footer-style2.html">SIGN UP</a></li>
+                                </ul> -->
+                            </li>
+                            <a href=#>SIGNUP</a>
+                            <li class="menu-item-has-children">
+
+                                <ul>
+                                    <li><a href={% url 'client:clientsignup' %}>AS CLIENT</a></li>
+                                    <li><a href={% url 'agent:agentsignup' %}>AS AGENT</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                        {% endif %}
+                      </li>
+                      <li class="menu-item">
+                          <a href={% url 'contact' %}>contact us</a>
+                      </li>
+                    </ul>
+
+                    <ul class="mobile-topnav container">
+                      {% if user.is_agent %}
+                      <li><a href={% url 'client:enqhotel' %}>CLIENT ACCOUNT</a></li>
+                      <li><a href={% url 'agent:agenthotellist' %}>AGENT ACCOUNT</a></li>
+                      {% elif user.is_client %}
+                        <li><a href={% url 'client:enqhotel' %}>MY ACCOUNT</a></li>
+                      {% endif %}
+                      {% if user.is_authenticated %}
+                      <li><a href={% url 'accounts:userprofile' %}>Profile</a> </li>
+                      {% else %}
+                      <li><a href={% url 'accounts:user_login' %}>Login</a> </li>
+                      {% endif %}
+                    </ul>
+
+                </nav>
+            </div>
+        </header>
+        {% if home %}{% else %}
+        <div class="page-title-container">
+            <div class="container">
+                <div class="page-title pull-left">
+                  {% if place %}
+                    <h2 class="entry-title">{{ place }}</h2>
+                  {% else %}
+                    <h2 class="entry-title">{{ insertme }}</h2>
+                  {% endif %}
+                </div>
+                <!-- <ul class="breadcrumbs pull-right">
+                    <li><a href="#">HOME</a></li>
+                    <li><a href="#">PAGES</a></li>
+                    <li class="active">Blank</li>
+                </ul> -->
+            </div>
+        </div>
+        {% endif %}
+                  {% block content %}
+                  {% endblock %}
+        <footer id="footer">
+            <div class="bottom gray-area">
+                <div class="container">
+                    <div class="pull-left">
+                        <a href={% url 'index' %} title="Travelo - home">
+                            <img src={% static "images/glylogo.png" %} alt="Travelo HTML5 Template" />
+                        </a>
+                    </div>
+                    <div class="pull-right">
+                        <a id="back-to-top" href="#" class="animated" data-animation-type="bounce"><i class="soap-icon-longarrow-up circle"></i></a>
+                    </div>
+                    <div class="copyright pull-right">
+                        <p>&copy; 2018 Good Luck Yatra. Develop & Design By: Cosmo Info Solutions</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+
+    <!-- Javascript -->
+    <script type="text/javascript" src={% static "js/jquery-1.11.1.min.js" %}></script>
+    <script type="text/javascript" src={% static "js/jquery.noconflict.js" %}></script>
+    <script type="text/javascript" src={% static "js/modernizr.2.7.1.min.js" %}></script>
+    <script type="text/javascript" src={% static "js/jquery-migrate-1.2.1.min.js" %}></script>
+    <script type="text/javascript" src={% static "js/jquery.placeholder.js" %}></script>
+    <script type="text/javascript" src={% static "js/jquery-ui.1.10.4.min.js" %}></script>
+
+    <!-- Twitter Bootstrap -->
+    <script type="text/javascript" src={% static "js/bootstrap.js" %}></script>
+
+    <!-- load revolution slider scripts -->
+    <script type="text/javascript" src={% static "components/revolution_slider/js/jquery.themepunch.plugins.min.js" %}></script>
+    <script type="text/javascript" src={% static "components/revolution_slider/js/jquery.themepunch.revolution.min.js" %}></script>
+
+    <!-- load BXSlider scripts -->
+    <script type="text/javascript" src={% static "components/jquery.bxslider/jquery.bxslider.min.js" %}></script>
+
+    <!-- Flex Slider -->
+    <script type="text/javascript" src={% static "components/flexslider/jquery.flexslider.js" %}></script>
+
+
+    <!-- parallax -->
+    <script type="text/javascript" src={% static "js/jquery.stellar.min.js" %}></script>
+
+    <!-- waypoint -->
+    <script type="text/javascript" src={% static "js/waypoints.min.js" %}></script>
+
+    <!-- load page Javascript -->
+    <script type="text/javascript" src={% static "js/theme-scripts.js" %}></script>
+    <script type="text/javascript" src={% static "js/scripts.js" %}></script>
+
+    <script type="text/javascript">
+        tjq(document).ready(function() {
+            tjq('.revolution-slider').revolution(
+            {
+                dottedOverlay:"none",
+                delay:8000,
+                startwidth:1170,
+                startheight:646,
+                onHoverStop:"on",
+                hideThumbs:10,
+                fullWidth:"on",
+                forceFullWidth:"on",
+                navigationType:"none",
+                shadow:0,
+                spinner:"spinner4",
+                hideTimerBar:"on",
+            });
+        });
+    </script>
+    <script type="text/javascript">
+        tjq(document).ready(function() {
+            tjq("#profile .edit-profile-btn").click(function(e) {
+                e.preventDefault();
+                tjq(".view-profile").fadeOut();
+                tjq(".edit-profile").fadeIn();
+            });
+
+            setTimeout(function() {
+                tjq(".notification-area").append('<div class="info-box block"><span class="close"></span><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Necessitatibus ab quis a dolorem, placeat eos doloribus esse repellendus quasi libero illum dolore. Esse minima voluptas magni impedit, iusto, obcaecati dignissimos.</p></div>');
+            }, 10000);
+        });
+        tjq('a[href="#profile"]').on('shown.bs.tab', function (e) {
+            tjq(".view-profile").show();
+            tjq(".edit-profile").hide();
+        });
+    </script>
+
+</body>
+</html>
